@@ -1,30 +1,36 @@
-const express = require('express'); 
-const cors = require('cors'); 
-const JSend = require('./jsend'); 
-const contactsRouter = require('./routes/contacts.router'); 
+const express = require('express');
+const cors = require('cors');
+const JSend = require('./jsend');
+const contactsRouter = require('./routes/contacts.router');
 const {
     resourceNotFound,
     handleError,
 } = require('./controllers/errors.controller');
+const { specs, swaggerUi } = require('./docs/swagger');
 
-const app = express(); 
+const app = express();
 
-app.use(cors()); 
-app.use(express.json()); 
-app.use(express.urlencoded({ extended: true })); 
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => { 
-return res.json(JSend.success()); 
-}); 
+// Serve Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
+// Serve static files from the 'public' directory
 app.use('/public', express.static('public'));
 
-contactsRouter.setup(app); 
+app.get('/', (req, res) => {
+    return res.json(JSend.success());
+});
 
-// Handle 404 response
+// Setup routes
+contactsRouter.setup(app);
+
+// Handle 404 response for undefined routes
 app.use(resourceNotFound);
 
 // Define error-handling middleware last, after other app.use() and routes calls
 app.use(handleError);
 
-module.exports = app; 
+module.exports = app;

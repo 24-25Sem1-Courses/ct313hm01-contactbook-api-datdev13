@@ -1,0 +1,92 @@
+# src/docs/components.yaml
+components:
+  schemas:
+    Contact:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          description: Unique identifier for the contact
+        name:
+          type: string
+          description: Contact name
+        email:
+          type: string
+          format: email
+          description: Contact email
+        address:
+          type: string
+          description: Contact address
+        phone:
+          type: string
+          description: Contact phone number
+        favorite:
+          type: integer
+          enum: [0, 1]
+          default: 0
+          description: Indicates whether the contact is marked as favorite
+        avatar:
+          type: string
+          readOnly: true
+          description: Path to the contact's avatar image file
+        avatarFile:
+          type: string
+          format: binary
+          writeOnly: true
+          description: File upload for the contact's avatar image
+
+  responses:
+    200NoData:
+      description: Successful operation with no data
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status
+                enum: [success]
+              data:
+                type: object
+                properties: {}
+
+    500InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status
+                enum: [error]
+              message:
+                type: string
+                description: Error message
+
+    400InvalidRequest:
+      description: Invalid request data
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status
+                enum: [fail]
+              message:
+                type: string
+                description: Error message indicating why the request is invalid
+
+  parameters:
+    contactIdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier for the contact
+      schema:
+        type: integer
