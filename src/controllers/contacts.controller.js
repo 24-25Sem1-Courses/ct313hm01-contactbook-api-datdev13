@@ -12,7 +12,8 @@ filters.push(`name=${name}`);
 } 
 console.log(filters.join('&')); 
 return res.json( 
-JSend.success({ contacts: [], 
+JSend.success({ 
+contacts: [], 
 }) 
 ); 
 } 
