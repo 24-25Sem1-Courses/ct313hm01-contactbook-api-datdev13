@@ -36,4 +36,4 @@ getContact,
 createContact, 
 updateContact, 
 deleteContact, 
-}; 
+};
