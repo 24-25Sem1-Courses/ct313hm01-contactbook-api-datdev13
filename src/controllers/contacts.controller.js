@@ -1,4 +1,4 @@
-types: const JSend = require('../jsend'); 
+const JSend = require('../jsend'); 
 function createContact(req, res) { 
 return res.status(201).json(JSend.success({ contact: {} })); } 
 function getContactsByFilter(req, res) { 
@@ -12,8 +12,7 @@ filters.push(`name=${name}`);
 } 
 console.log(filters.join('&')); 
 return res.json( 
-JSend.success({ 
-contacts: [], 
+JSend.success({ contacts: [], 
 }) 
 ); 
 } 
