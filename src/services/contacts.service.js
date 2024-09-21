@@ -15,7 +15,7 @@ function readContact(payload) {
   };
 }
 
-// Define functions for accessing the database
+
 
 async function createContact(payload) {
   const contact = readContact(payload);
