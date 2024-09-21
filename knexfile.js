@@ -1,5 +1,5 @@
 require('dotenv').config();
-<<<<<<< HEAD
+
 const { DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME } = process.env;
 
 /**
@@ -19,7 +19,6 @@ module.exports = {
     directory: './seeds',
   },
 };
-=======
 
 /**
 * @type { import("knex").Knex.Config }
@@ -38,4 +37,4 @@ seeds: {
 directory: './seeds',
 },
 };
->>>>>>> 302f1edf263857308f97fff6d592dedec7655e72
+
